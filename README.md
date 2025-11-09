@@ -1,150 +1,200 @@
-Flask Resume Analyzer
+Code Deployer & Mail Agent
 
-A lightweight Flask-based Resume Analyzer that compares a candidate’s resume with a provided Job Description (JD) to compute an ATS (Applicant Tracking System) Score and generate improvement suggestions using Gemini/Gemma or TF-IDF fallback models.
+A powerful Streamlit-based application that allows you to manage GitHub repositories, deploy code, and generate AI-powered job application emails using Gemma/Gemini models.
 
 ⸻
 
 🚀 Features
-	•	Resume input: Upload PDF/DOCX/TXT or paste plain text.
-	•	Job Description input: Paste text or provide a public JD URL.
-	•	Keyword & Semantic Scoring: Combines keyword match (TF-IDF) and semantic similarity (Gemini embeddings or TF-IDF fallback).
-	•	Gemma-powered Suggestions: Suggests improved resume bullet points based on JD context.
-	•	Logging: Detailed console logs for traceability (embedding creation, file extraction, scoring, etc.).
-	•	Temporary file handling: Uploaded files are deleted immediately after processing.
+
+🧰 Code Deployer
+	•	Upload multiple files or a zipped folder.
+	•	Automatically generate a README.md file.
+	•	Push the uploaded content to a GitHub repository.
+	•	Manage existing repositories (list & delete).
+
+💼 Job Email Generator
+	•	Upload a PDF/DOCX resume or paste your resume text.
+	•	Sanitize personal data (email, phone numbers).
+	•	Paste or upload a Job Description (JD).
+	•	Generate a professional email using Gemma.
+	•	Edit, review, and send the generated email via Gmail.
+	•	Log all sent emails in a local folder.
 
 ⸻
 
-🧠 Tech Stack
-	•	Flask (backend web framework)
-	•	pdfplumber, python-docx (text extraction)
-	•	scikit-learn (TF-IDF and similarity metrics)
-	•	Google GenAI SDK (google.genai) (optional, for embeddings and suggestions)
-	•	Bootstrap 5 (UI styling)
+🧱 Project Structure
 
-⸻
-
-📂 Project Structure
-
-Flask-Resume-Analyzer/
-│
-├── app.py                # Main Flask application
-├── README.md             # Documentation
-├── requirements.txt      # Python dependencies
-└── templates/ (optional) # If you split HTML out later
+codepush-agent/
+├── app.py                # Main Streamlit application
+├── github_agent.py       # Handles GitHub operations
+├── gemma_agent.py        # Generates email content via Gemma
+├── gmail_sender.py       # Sends emails via Gmail
+├── requirements.txt      # Dependencies (recommended)
+├── .env                  # Environment variables (ignored in Git)
+└── README.md             # This file
 
 
 ⸻
 
 ⚙️ Installation
 
-1. Clone the Repository
+1. Clone the repository
 
-git clone https://github.com/<your-username>/Flask-Resume-Analyzer.git
-cd Flask-Resume-Analyzer
+git clone https://github.com/<your-username>/codepush-agent.git
+cd codepush-agent
 
-2. Create a Virtual Environment
+2. Create a virtual environment
 
 python -m venv venv
-source venv/bin/activate   # macOS/Linux
-venv\Scripts\activate      # Windows
+source venv/bin/activate      # macOS/Linux
+venv\Scripts\activate         # Windows
 
-3. Install Dependencies
+3. Install dependencies
 
 pip install -r requirements.txt
 
-4. (Optional) Set Up Environment Variables
+4. Configure environment variables
 
-Create a .env file and add:
+Create a .env file in the project root:
 
-FLASK_SECRET=your_secret_key_here
-GEMINI_API_KEY=your_gemini_api_key_here
+GITHUB_TOKEN=ghp_xxx...         # Your GitHub personal access token
+GMAIL_ADDRESS=you@example.com    # Default sender email
+APP_LOG_DIR=logs                 # Optional custom log folder
+GEMINI_API_KEY=AIza...           # Optional Gemini key
 
+⚠️ Never push .env or token files to GitHub.
 
 ⸻
 
 🧩 Usage
 
-Run the Flask Server
+Run the app locally:
 
-python app.py
+streamlit run app.py
 
-Access the web interface at: http://127.0.0.1:5000￼
+Then open the displayed URL, usually http://localhost:8501￼
 
-Steps
-	1.	Upload or paste your Resume (left panel)
-	2.	Paste or provide a Job Description URL (right panel)
-	3.	Click Analyze
-	4.	View:
-	•	ATS Score (Keyword + Semantic)
-	•	Matched & Missing Keywords
-	•	Gemma-based Resume Suggestions
+🔹 Tab 1: Code Deployer
+	1.	Enter GitHub repo name, branch, and commit message.
+	2.	Upload files or a zipped project folder.
+	3.	Optionally auto-generate a README.md.
+	4.	Click Push to GitHub.
+	5.	View upload status and logs.
 
-⸻
-
-🧾 Example Output
-
-ATS Score: 85.3%
-Keyword Match: 72.4%
-Semantic Match: 89.1% (via TF-IDF)
-
-Present Keywords: ['python', 'ai', 'ml', 'flask', 'data']
-Missing Keywords: ['deployment', 'cloud', 'nlp']
-
-Suggestions:
-- Optimized model training pipelines using Python and TensorFlow.
-- Automated document parsing with Flask and pdfplumber.
-- Designed scalable AI workflows improving inference time by 25%.
-
+🔹 Tab 2: Job Email Generator
+	1.	Paste or upload your resume.
+	2.	Paste the job description.
+	3.	Click Generate Email (Gemma-powered).
+	4.	Edit and review the AI-generated email.
+	5.	Enter recipient and your Gmail, then send.
+	6.	A copy of each sent email is saved in the logs/ folder.
 
 ⸻
 
-🧰 Requirements
+🪄 Requirements
 
-Flask
-pdfplumber
+Python >= 3.10
+
+Example requirements.txt:
+
+streamlit
+PyMuPDF
 python-docx
+python-dotenv
+requests
+gitpython
 scikit-learn
 numpy
-requests
-python-dotenv
 google-genai  # optional
 
-Install via:
+Install all:
 
 pip install -r requirements.txt
 
 
 ⸻
 
-🐳 Docker (Optional)
+🧰 Security & Git Hygiene
+
+Create a .gitignore file with:
+
+# Secrets
+.env
+token.json
+token.pickle
+credentials.json
+
+# Virtual environments
+venv/
+.venv/
+
+# Logs
+logs/
+*.log
+
+# Cache
+__pycache__/
+.streamlit/
+
+Remove tracked secret files
+
+git rm --cached .env token.json token.pickle credentials.json
+
+Then commit & push safely:
+
+git add .gitignore
+git commit -m "Remove sensitive files and add .gitignore"
+git push origin main
+
+If GitHub blocks your push due to secrets, purge them with:
+
+pip install git-filter-repo
+git filter-repo --path .env --path token.json --path token.pickle --path credentials.json --invert-paths
+git push origin --force
+
+
+⸻
+
+🐳 Optional: Run in Docker
+
+Dockerfile:
 
 FROM python:3.11-slim
 WORKDIR /app
 COPY . /app
 RUN pip install --no-cache-dir -r requirements.txt
-EXPOSE 5000
-CMD ["python", "app.py"]
+EXPOSE 8501
+CMD ["streamlit", "run", "app.py", "--server.port=8501", "--server.headless=true"]
 
-Build & Run:
+Build & run:
 
-docker build -t resume-analyzer .
-docker run -p 5000:5000 resume-analyzer
+docker build -t codepush-agent .
+docker run -p 8501:8501 --env-file .env codepush-agent
+
+
+⸻
+
+🧾 Example Log Output
+
+✅ Email sent and saved to logs!
+[LOG] 2025-11-09 16:12:23 - push_folder_to_github: success
+[LOG] 2025-11-09 16:13:01 - resume extraction successful
 
 
 ⸻
 
-⚖️ License
+👨‍💻 Author
 
-MIT License — free for personal and commercial use.
-
-⸻
-
-💬 Contact
-
-Author: Dinesh Karri
-Email: [email hidden for privacy]
-GitHub: https://github.com/Dinesh-1215￼
+Dinesh Karri
+AI & ML Engineer | TCS Bangalore
+GitHub Profile￼
 
 ⸻
 
-🚀 “Analyze. Improve. Impress.” — Smart resume optimization powered by Generative AI.
+🪶 License
+
+MIT License © 2025 Dinesh Karri
+
+⸻
+
+⚡ Code smarter. Apply faster. — Automate your Git pushes and job emails with AI.
