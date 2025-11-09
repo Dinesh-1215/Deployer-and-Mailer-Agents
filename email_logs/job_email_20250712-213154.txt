@@ -1,0 +1,30 @@
+To: dineshkarri1999@gmail.com
+From: dineshkarri9@gmail.com
+Subject: Job Application
+
+Subject: Senior Application Developer Application - Dinesh Karri
+
+Dear Goldman Sachs Hiring Team,
+
+I am writing to express my enthusiastic interest in the Senior Application Developer position within your Generative AI & Document AI Platform team, as advertised on [Platform where you saw the advert - e.g., Goldman Sachs careers website].  Having followed Goldman Sachs' innovative work in AI for some time, I am particularly excited by the opportunity to contribute to such a cutting-edge initiative.
+
+My resume, attached for your review, details my two years of experience as an AI/ML Developer at Tata Consultancy Services (TCS), where I successfully built and deployed several end-to-end intelligent solutions leveraging large language models, AI agents, and Retrieval-Augmented Generation (RAG).  My projects demonstrate a strong proficiency in Python, NLP, and generative AI, with a consistent focus on creating scalable, efficient, and impactful real-world applications.
+
+Specifically, my experience aligns well with the requirements outlined in the job description.  I have extensive experience with:
+
+* Building scalable distributed platforms:  My work on the Automotive Test Case Generation tool involved building a Flask-based UI and integrating with TensorFlow for automated simulation and validation, demonstrating my ability to create scalable solutions.
+* Relational and Non-Relational Databases: I am proficient in using SQL and have experience working with various NoSQL databases, including those mentioned in the requirements.
+* RESTful Web Services:  The development of my Flask-based UI for the test case generation tool showcases my experience in building and deploying RESTful web services.
+* End-to-End Software Product Development: I have consistently designed, developed, and deployed complete software products from concept to deployment, as evidenced by my various projects (Resume Matcher, MERN Stack AI CRUD App, etc.).
+* LangChain and RAG: My experience developing an Agentic RAG system for internal QA using LangChain directly addresses a preferred qualification.
+
+While my experience falls slightly short of the minimum years of experience requested, I am confident that my skills and accomplishments, particularly in the specific technologies and methodologies relevant to this role, make me a strong candidate.  My recent certifications in Azure AI and Oracle Cloud Infrastructure AI, further demonstrate my commitment to continuous learning and staying at the forefront of AI advancements.
+
+I am eager to learn more about this exciting opportunity and discuss how my skills and passion for AI can benefit Goldman Sachs. Thank you for your time and consideration.
+
+Sincerely,
+
+Dinesh Karri
+[email hidden]
+[phone hidden]
+linkedin.com/in/dineshkarri
